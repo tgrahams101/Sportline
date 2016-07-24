@@ -3,7 +3,14 @@ var Schema = mongoose.Schema;
 
 var PostSchema = new Schema ({
       title: String,
-      body: String
+      body: String,
+      comments: [
+          {
+             type: Schema.Types.ObjectId,
+             ref: 'Comment'
+          }
+
+      ]
 });
 
 
