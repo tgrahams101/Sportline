@@ -23,7 +23,8 @@ var comments = [
 // app.use(bodyParser.urlencoded({extended: true}));
 
 //PERMIT SERVING OF STATIC FILES FROM PUBLIC FOLDER
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 //BRING IN THE MONGODB DATABASE AND MODELS VIA MODELS FOLDER
 var db = require('./models');
@@ -34,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //SERVER ROUTING FOR HOME Port
 
 app.get('/', function handleHomeGet(req, res){
-     res.sendFile(__dirname + '/index.html');
+     res.sendFile(__dirname + '/views/index.html');
 });
 
 app.get('/api/posts', function(req, res) {
@@ -157,11 +158,30 @@ app.get('/api/custom/:id', function (req, res){
     //  });
 
 
-    db.Post.findOne({_id: req.params.id}, function (err, success){
-        db.Post.findOne({_id:req.params.id}).populate('comments').exec(function (err, success){
-             console.log(success);
-             res.json(success);
-        });
+    db.Post.findOne({_id: req.params.id}, function (err, bats){
+            // var something = bats;
+            // //  res.json(something);
+            // db.Comment.findOne({_id: '57940d0c3f4ab0bd3e826380'}, function (err, success){
+            //   success.postId.push(something);
+            //   success.save(function (err, success){
+            //     console.log('happy');
+            //     res.json(success);
+            //   });
+            // });
+
+             db.Comment.find(function (err, success){
+                //  res.json(success);
+                 success.forEach(function(object){
+
+                    object.postId.push(bats);
+
+                    object.save(function (err, success){
+                      console.log('I love dogs and' + bats._id);
+                    });
+                 });
+                 console.log(success);
+             });
+
           // arrayList.forEach(function (object){
           //   object.postId.push(success);
           // });
@@ -191,13 +211,21 @@ app.delete('/api/posts/:id', function (req, res){
               res.sendStatus(500);
             }
             res.json(success);
-            Console.log('The following post was removed', success);
+            console.log('The following post was removed', success);
         });
 
 
 
 
 });
+//TESTING
+app.get('/api/customize/:id', function (req, res){
+  db.Comment.find({postId: req.params.id}, function (err, success){
+    console.log('WE da bast' + success);
+    res.json(success);
+    });
+});
+
 
 app.get('/api/posts/:selectedpost/comments', function (req, res){
         // db.Post.findOne({_id: req.params.selectedpost}, function (err, success){
@@ -287,7 +315,7 @@ app.delete('/api/posts/:selectedpost/comments/:selectedcomment', function (req, 
 
 
 app.get('/api/comments', function (req, res){
-     db.Comment.find().populate('postId').exec(function (err, success){
+     db.Comment.find(function (err, success){
        if (err){
          res.sendStatus(500);
        }

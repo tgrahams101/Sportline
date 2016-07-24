@@ -1,0 +1,12 @@
+.jumbotron{
+  background-image: url('http://atlantablackstar.com/wp-content/uploads/2014/12/colin-kaepernick-tattoos.jpg');
+}
+
+#jumbo {
+  background-image: url('http://atlantablackstar.com/wp-content/uploads/2014/12/colin-kaepernick-tattoos.jpg');
+}
+
+
+body {
+  background-color: red;
+}
