@@ -3,12 +3,19 @@
   <head>
     <meta charset="utf-8">
       <title>Sportline</title>
+
+        <!-- Stylesheets -->
        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-XYCjB+hFAjSbgf9yKUgbysEjaVLOXhCgATTEBpCqT1R3jvG5LGRAK5ZIyRbH5vpX" crossorigin="anonymous">
-        <link ref="stylesheet" href="styles/style.css">
-        <script type ="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
-        </script>
-        <script href="/script.js">
-        </script>
+        <link rel="stylesheet" href="/styles/style.css">
+
+        <!-- External Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+
+
+        <!-- Client-side Script -->
+        <script src="scripts/script.js"></script>
   </head>
   <body>
     <div class="jumbotron">
@@ -20,16 +27,19 @@
         </div>
     </div>
     <section class="container">
-      <h2>Posts</h2>
-      <p>hello world</p>
-      <script id="posttemplate" type="text/x-handlebars-template">
+      <h1>Posts</h1>
+    
+      <div class="col-md-12" id="postsDiv">
+          <script id="postTemplate" type="text/x-handlebars-template">
 
-          <div class="col-md-10">
-              <h3>{{title}}</h3>
-              <p>{{body}}</p>
+              <div class="col-md-10">
+                  <h4>{{title}}</h4>
+                  <p>{{body}}</p>
 
-          </div>
-      </script>
+              </div>
+
+          </script>
+      </div>
     </section>
   </body>
 </html>
