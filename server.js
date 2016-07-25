@@ -379,6 +379,6 @@ app.put('/api/comments', function (req, res){
    });
 
 //CONFIGURE SERVER TO LISTEN AT THE LOCAL HOST PORT OR EXTERNAL HOSTING
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log('We da best! Listening at Port 3000 Over');
 });
