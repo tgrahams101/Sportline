@@ -22,20 +22,52 @@
         <div class='container' id="jumbo">
           <h1>Niner Nation</h1>
           <p>Share and engage with fans and friends</p>
-          <p><a class="btn btn-primary btn-lg">Write a post!</a></p>
+          <p><a class="btn btn-primary btn-lg" id="newPostButton">Write a post!</a></p>
+          <div id="newPostFormDiv" class="col-md-3 ">
+          <h4>  New Post</h4>
+            <form id="newPostForm">
 
+              <input type="text" name="titlepost" placeholder="Title of Post"></br></br>
+              <input type="text" name="bodypost" placeholder="Your post goes here" id="postBodyInputField">
+
+              <input id="newPostSubmitButton" type="submit" class="btn btn-primary">
+              <button type="button" class="btn btn-default btn-xs" id="newPostCancelButton">
+  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</button>
+            </form>
+          </div>
         </div>
+
     </div>
     <section class="container">
+    <div class="col-md-12" id="postsTextRow">
       <h1>Posts</h1>
-    
+    </div>
       <div class="col-md-12" id="postsDiv">
           <script id="postTemplate" type="text/x-handlebars-template">
 
-              <div class="col-md-10">
+              <div class="row post col-md-10" data-post-id={{_id}}>
+                    <button type="button" class="btn btn-danger btn-xs" id="postDeleteButton">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
                   <h4>{{title}}</h4>
-                  <p>{{body}}</p>
+                  <p>{{body}} </br>
+                  <p id="commentSection"> Comments </p>
+                  <span id="commentsList">
+                   {{#each comments}} {{body}}  <hr/> {{/each}}
+                  </span>
+                 <form id="newCommentForm">
+                  <!-- <div class="col-md-4"> -->
+                 <input type="text" name="bodypost" class="form-control input-sm" placeholder="Comment here" id="commentLine">
 
+                 <input type="submit" class="btn btn-info btn-xs" id="commentSubmitButton">
+                <!-- </div> -->
+                 </form>
+
+                  </p>
+                </br>
+                </br>
+              <hr id="postLine" />
               </div>
 
           </script>

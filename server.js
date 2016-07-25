@@ -55,11 +55,19 @@ app.post('/api/posts', function (req, res) {
     console.log(req.body.bodypost);
     console.log(req.body.titlepost);
 
-    var newPost = new db.Post({
-          title: req.body.bodypost,
-          body: req.body.titlepost,
-          comments: []
-     });
+    if (req.body.titlepost.length < 1 || req.body.bodypost.length < 1){
+           res.send('You must enter in input for title and body');
+    }
+    else {
+
+
+        var newPost = new db.Post({
+            title: req.body.titlepost,
+            body: req.body.bodypost,
+            comments: []
+        });
+
+
 // //TESTING OUT COMMENTS BEGIN
 //
 //     var commentOne = new db.Comment ({
@@ -96,7 +104,7 @@ app.post('/api/posts', function (req, res) {
     //   }]);
     //
     //   res.json(newPost);
-
+  }
 });
 
 app.put('/api/posts/:id', function(req, res){
@@ -251,7 +259,8 @@ app.post('/api/posts/:selectedpost/comments', function (req, res) {
 
     db.Post.findOne({_id: req.params.selectedpost}, function (err, success){
               console.log(success);
-
+              console.log('HELLO!');
+              console.log('LOST MY MIND' + req.body.bodypost);
             //CREATING NEW COMMMENT WITH POSTID REFERENCE
               var newComment = new db.Comment({
                     body: req.body.bodypost,
@@ -273,7 +282,7 @@ app.post('/api/posts/:selectedpost/comments', function (req, res) {
                 if (err){
                   res.sendStatus(500);
                 }
-                res.json(success);
+                res.json(newComment);
                 console.log('Success. Comment with the id: ' + newComment._id + ' was successfully saved!');
 
               });
