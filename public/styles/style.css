@@ -25,10 +25,17 @@
   right: 0px;
 }
 
+#postEditButton{
+ position: absolute;
+right: 40px;
+ /*text-align: right;*/
+}
+
 #postDeleteButton {
-   position: absolute;
-   top: 0px;
-   right: 0px;
+position: absolute;
+right: 0px;
+/*text-align: right;*/
+
 }
 
 #postsTextRow{
@@ -43,7 +50,8 @@
 
 #commentSubmitButton {
 margin-left: 5px;
- float: left;
+margin-top: 5px;
+ float: top;
 
 }
 
@@ -70,4 +78,10 @@ margin-left: 5px;
 #postLine {
   border-width: 10px;
   border-color: rgb(76, 22, 131);
+}
+
+h4 {
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+                 0px -5px 35px rgba(255,255,255,0.3);
+  font-weight: 600;
 }

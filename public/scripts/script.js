@@ -34,7 +34,7 @@ $(document).ready(function(){
   $('#newPostForm').on('submit', function (event){
             event.preventDefault();
             $('#newPostButton').show();
-            $('#newAlbumForm').trigger('reset');
+            $('#newPostForm').trigger('reset');
 
 
             $.ajax({
@@ -50,12 +50,13 @@ $(document).ready(function(){
     });
 
     $('div').on('submit', '#newCommentForm', function (event){
+
               event.preventDefault();
               console.log('Comment form');
             var id = $(this).closest('.post').data('post-id');
             console.log(id);
 
-            var $commentSpan = $(this).closest('#commentsList');
+            var commentSpan = $(this).siblings('span');
 
             var endpoint = '/api/posts/' + id +'/comments';
             console.log(endpoint);
@@ -75,7 +76,7 @@ $(document).ready(function(){
 
 
                    console.log('Comment logged');
-                   $(this).closest('#commentsList').append(json.body);
+                   commentSpan.append(json.body + '<hr />');
 
               }
 
@@ -84,6 +85,42 @@ $(document).ready(function(){
 
 
       });
+
+      $('div').on('click', '#postDeleteButton', function (event){
+          event.preventDefault();
+          console.log('Delete button clicked');
+          var id = $(this).closest('.post').data('post-id');
+          var divForEmpty = $(this).closest('.post');
+          console.log(id);
+
+          var endpoint = '/api/posts/' + id;
+          console.log(endpoint);
+
+          $.ajax({
+
+              method: 'DELETE',
+              url: endpoint,
+              data: $(this).serialize(),
+              success: onPostDeleteSuccess,
+              error: onPostDeleteError
+            });
+
+          function onPostDeleteSuccess () {
+              divForEmpty.empty();
+          }
+
+          function onPostDeleteError () {
+              console.log('Error in deletion of post');
+
+          }
+
+
+      });
+
+      $('#postEditButton').on('click', function (event){
+
+
+      })
 
 
 
