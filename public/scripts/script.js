@@ -191,13 +191,15 @@ $(document).ready(function(){
             var selectedComment = $(this).siblings('p');
 
 
+
             // console.log(selectedComment[0].innerText);
             console.log(selectedComment);
+            
             $('#editCommentForm').on('submit', function (event){
               event.preventDefault();
-              var serializedData = $(this).serialize();
-              console.log(serializedData);
-              console.log(endpoint);
+              // var serializedData = $(this).serialize();
+              // console.log(serializedData);
+              // console.log(endpoint);
 
 
 
@@ -213,13 +215,14 @@ $(document).ready(function(){
 
                     function onEditSuccess(json) {
                       console.log(json);
+                        $(this).trigger('reset');
                         if (json.body.length > 0){
                           $('#editCommentModal').modal('hide');
                           console.log(selectedComment[0]);
                           console.log(json.body);
-                          $(this).trigger('reset');
-                          selectedComment[0].innerText = json.body;
 
+                          selectedComment[0].innerText = json.body;
+                          return;
                         }
 
                         else {

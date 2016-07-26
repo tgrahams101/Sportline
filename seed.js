@@ -20,7 +20,13 @@ var posts = [
   title: "I enjoy college football more",
   body: "Idk but I like college football alot more than the NFL. I love cheering for my college team! Go Cardinal!",
   comments:[]
-}];
+},
+{
+  title: "Was firing Jim Harbaugh the worst choice ever?",
+  body:  "Methinkso. How about others?",
+  comments: []
+}
+];
 
 var comments = [
 {
