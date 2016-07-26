@@ -181,6 +181,7 @@ $(document).ready(function(){
       });
 
       $('div').on('click', '#commentEditButton', function (event){
+            event.preventDefault();
             $('#editCommentModal').modal('toggle');
 
             var id = $(this).closest('.row').data('comment-id');
@@ -193,7 +194,13 @@ $(document).ready(function(){
             // console.log(selectedComment[0].innerText);
             console.log(selectedComment);
             $('#editCommentForm').on('submit', function (event){
-                  event.preventDefault();
+              event.preventDefault();
+              var serializedData = $(this).serialize();
+              console.log(serializedData);
+              console.log(endpoint);
+
+
+
 
                     $.ajax({
                       method: 'PUT',
@@ -202,18 +209,23 @@ $(document).ready(function(){
                       success: onEditSuccess,
                       error: onEditError
                       });
-                      $(this).trigger('reset');
+
+
                     function onEditSuccess(json) {
                       console.log(json);
                         if (json.body.length > 0){
                           $('#editCommentModal').modal('hide');
-
+                          console.log(selectedComment[0]);
+                          console.log(json.body);
+                          $(this).trigger('reset');
                           selectedComment[0].innerText = json.body;
+
                         }
 
                         else {
                           console.log('NO GO BRO!!');
                         }
+
                     }
 
 
@@ -222,6 +234,7 @@ $(document).ready(function(){
                     }
 
             });
+
     });
 
     $('div').on('click', '#commentDeleteButton', function (event){
