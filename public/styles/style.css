@@ -38,6 +38,16 @@ right: 0px;
 
 }
 
+#commentEditButton{
+  position: absolute;
+  right: 40px;
+}
+
+#commentDeleteButton{
+  position: absolute;
+  right: 0px;
+}
+
 #postsTextRow{
   color: white;
   background-color: rgb(23, 101, 134);
@@ -75,7 +85,7 @@ margin-top: 5px;
 
 }
 
-#editPostBody:focus {
+.editPostBody:focus {
   width: 250px;
   height: 100px;
 }
@@ -85,8 +95,12 @@ margin-top: 5px;
   border-color: rgb(76, 22, 131);
 }
 
-h4 {
+h2 {
   text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
                  0px -5px 35px rgba(255,255,255,0.3);
   font-weight: 600;
+}
+
+#commentParagraph {
+  display: inline;
 }

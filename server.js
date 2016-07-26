@@ -113,24 +113,24 @@ app.put('/api/posts/:id', function(req, res){
         if (err){
             res.send('An error in the making of finding post by id');
           }
-        // if ((req.body.titlepost.length > 0) && (!req.body.bodypost.length)){
-        //       success.title = req.body.titlepost;
-        //       success.save(function (err, success){
-        //           if(err){
-        //             res.send('There was an error in saving');
-        //           }
-        //           res.json(success);
-        //       });
-        // }
-        // else if ((req.body.bodypost.length > 0) && (!req.body.titlepost.length)){
-        //   success.body = req.body.bodypost;
-        //   success.save(function (err, success){
-        //       if(err){
-        //         res.send('There was an error in saving');
-        //       }
-        //       res.json(success);
-        //   });
-        // }
+        if ((req.body.titlepost.length > 0) && (!req.body.bodypost.length)){
+              success.title = req.body.titlepost;
+              success.save(function (err, success){
+                  if(err){
+                    res.send('There was an error in saving');
+                  }
+                  res.json(success);
+              });
+        }
+        else if ((req.body.bodypost.length > 0) && (!req.body.titlepost.length)){
+          success.body = req.body.bodypost;
+          success.save(function (err, success){
+              if(err){
+                res.send('There was an error in saving');
+              }
+              res.json(success);
+          });
+        }
         else if ((req.body.bodypost.length > 0) && (req.body.titlepost.length > 0)){
           success.body = req.body.bodypost;
           success.title = req.body.titlepost;
@@ -349,7 +349,7 @@ app.put('/api/comments/:id', function (req, res){
             }
             if (req.body.bodypost.length > 0){
               success.body = req.body.bodypost;
-              res.json(success);
+
               success.save(function (err, success){
                 if (err){
                   res.sendStatus(500);

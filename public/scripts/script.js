@@ -34,7 +34,7 @@ $(document).ready(function(){
   $('#newPostForm').on('submit', function (event){
             event.preventDefault();
             $('#newPostButton').show();
-            $('#newPostForm').trigger('reset');
+
 
 
             $.ajax({
@@ -47,6 +47,7 @@ $(document).ready(function(){
             });
 
             $('#newPostFormDiv').hide();
+              $('#newPostForm').trigger('reset');
     });
 
     $('div').on('submit', '#newCommentForm', function (event){
@@ -124,7 +125,7 @@ $(document).ready(function(){
             console.log(id);
             var endpoint = '/api/posts/' + id;
             console.log(endpoint);
-            var selectedTitle = $(this).siblings('h4');
+            var selectedTitle = $(this).siblings('h2');
             var selectedBody = $(this).siblings('p');
 
             console.log(selectedTitle[0].innerText);
@@ -139,16 +140,31 @@ $(document).ready(function(){
                       success: onEditSuccess,
                       error: onEditError
                       });
-
+                      $(this).trigger('reset');
                     function onEditSuccess(json) {
                       console.log(json);
                         if ((json.title.length > 0) && (json.body.length > 0)){
                           $('#myModal').modal('hide');
                           selectedTitle[0].innerText = json.title;
                           selectedBody[0].innerText = json.body;
-                            $(this).trigger('reset');
+
 
                         }
+                        // if ((json.title.length > 0) && (json.body.length > 0)){
+                        //   $('#myModal').modal('hide');
+                        //   selectedTitle[0].innerText = json.title;
+                        //   selectedBody[0].innerText = json.body;
+                        //     $(this).trigger('reset');
+                        //
+                        // }
+                        // if ((json.title.length > 0) && (json.body.length > 0)){
+                        //   $('#myModal').modal('hide');
+                        //   selectedTitle[0].innerText = json.title;
+                        //   selectedBody[0].innerText = json.body;
+                        //     $(this).trigger('reset');
+                        //
+                        // }
+
                         else {
                           console.log('NO GO!!');
                         }
@@ -163,6 +179,81 @@ $(document).ready(function(){
 
 
       });
+
+      $('div').on('click', '#commentEditButton', function (event){
+            $('#editCommentModal').modal('toggle');
+
+            var id = $(this).closest('.row').data('comment-id');
+            console.log(id);
+            var endpoint = '/api/comments/' + id;
+            console.log(endpoint);
+            var selectedComment = $(this).siblings('p');
+
+
+            // console.log(selectedComment[0].innerText);
+            console.log(selectedComment);
+            $('#editCommentForm').on('submit', function (event){
+                  event.preventDefault();
+
+                    $.ajax({
+                      method: 'PUT',
+                      url: endpoint,
+                      data: $(this).serialize(),
+                      success: onEditSuccess,
+                      error: onEditError
+                      });
+                      $(this).trigger('reset');
+                    function onEditSuccess(json) {
+                      console.log(json);
+                        if (json.body.length > 0){
+                          $('#editCommentModal').modal('hide');
+
+                          selectedComment[0].innerText = json.body;
+                        }
+
+                        else {
+                          console.log('NO GO BRO!!');
+                        }
+                    }
+
+
+                    function onEditError() {
+                        console.log('Edit Error');
+                    }
+
+            });
+    });
+
+    $('div').on('click', '#commentDeleteButton', function (event){
+        event.preventDefault();
+        console.log('Delete button clicked');
+        var id = $(this).closest('.comment').data('comment-id');
+        var divForEmpty = $(this).closest('.comment');
+        console.log(id);
+
+        var endpoint = '/api/comments/' + id;
+        console.log(endpoint);
+
+        $.ajax({
+
+            method: 'DELETE',
+            url: endpoint,
+            data: $(this).serialize(),
+            success: onPostDeleteSuccess,
+            error: onPostDeleteError
+          });
+
+        function onPostDeleteSuccess () {
+            divForEmpty.empty();
+        }
+
+        function onPostDeleteError () {
+            console.log('Error in deletion of post');
+
+        }
+
+
+    });
 
 
 
