@@ -75,6 +75,11 @@ margin-top: 5px;
 
 }
 
+#editPostBody:focus {
+  width: 250px;
+  height: 100px;
+}
+
 #postLine {
   border-width: 10px;
   border-color: rgb(76, 22, 131);

@@ -117,10 +117,52 @@ $(document).ready(function(){
 
       });
 
-      $('#postEditButton').on('click', function (event){
+      $('div').on('click', '#postEditButton', function (event){
+            $('#myModal').modal('toggle');
+
+            var id = $(this).closest('.row').data('post-id');
+            console.log(id);
+            var endpoint = '/api/posts/' + id;
+            console.log(endpoint);
+            var selectedTitle = $(this).siblings('h4');
+            var selectedBody = $(this).siblings('p');
+
+            console.log(selectedTitle[0].innerText);
+            console.log(selectedBody);
+            $('#editPostForm').on('submit', function (event){
+                  event.preventDefault();
+
+                    $.ajax({
+                      method: 'PUT',
+                      url: endpoint,
+                      data: $(this).serialize(),
+                      success: onEditSuccess,
+                      error: onEditError
+                      });
+
+                    function onEditSuccess(json) {
+                      console.log(json);
+                        if ((json.title.length > 0) && (json.body.length > 0)){
+                          $('#myModal').modal('hide');
+                          selectedTitle[0].innerText = json.title;
+                          selectedBody[0].innerText = json.body;
+                            $(this).trigger('reset');
+
+                        }
+                        else {
+                          console.log('NO GO!!');
+                        }
+
+                      }
+
+                    function onEditError() {
+                        console.log('Edit Error');
+                    }
+
+            });
 
 
-      })
+      });
 
 
 
