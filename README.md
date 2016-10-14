@@ -25,6 +25,6 @@ Sportline is a single page app (SPA)that lets users share posts and comments abo
 
 ## Planned Features
 
-* I have some bugs regarding editing/deleting posts and editing comments.
+
 * Add API integration with giphy for 49er gifs
 * Integrate Twitter API to display 49er tweets
