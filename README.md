@@ -1,6 +1,6 @@
 # Sportline
 
-Sportline is a web app that lets users share posts and comments about sports--specifically the 49ers NFL team, to a single web page. It has two models, posts and comments, and uses full CRUD for both while dynamically altering it on the webpage.
+Sportline is a single page app (SPA)that lets users share posts and comments about sports--specifically the 49ers NFL team, to a single web page. It has two models, posts and comments, and uses full CRUD for both while dynamically altering it on the webpage.
 
 
 ## Technologies Used
